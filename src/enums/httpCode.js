@@ -16,6 +16,7 @@ const EnumHttpStatus = {
     INTERNAL_SERVER_ERROR: 500,
     NOT_IMPLEMENTED: 501,
     SERVICE_UNAVAILABLE: 503,
+    UNAUTHORIZED: 401,
 };
 
 export default EnumHttpStatus;
