@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-const { TOKEN_SECRET } = process.env;
+const { JWT_SECRET } = process.env;
 const verifiedToken = (req, res, next) => {
   const token = req.headers['access-token'];
   if (!token) {
@@ -8,7 +8,7 @@ const verifiedToken = (req, res, next) => {
       .json({ message: 'A token is required for authentication' });
   }
   try {
-    const decoded = jwt.verify(token, TOKEN_SECRET);
+    const decoded = jwt.verify(token, JWT_SECRET);
     req.user = decoded;
   } catch (error) {
     return res.status(400).json({ message: 'invalid Token' });
