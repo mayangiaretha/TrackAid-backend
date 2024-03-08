@@ -37,7 +37,7 @@ class UsersControllers {
 
     const createdUser = await newUser.save();
 
-    const token = generateJwt({ email, role: IS_USER });
+    const token = generateJwt({ email, username, role: IS_USER });
 
     return res.status(EnumHttpStatus.OK).json({
       message: 'User registered successfully',
@@ -65,11 +65,11 @@ class UsersControllers {
         .json({ message: 'Incorrect password' });
     }
 
-    const userId = loggedIn.userId;
+    const { username } = loggedIn;
 
     const userBody = {
-      userId: userId,
-      ...req.body,
+      username,
+      email,
     };
 
     const jwt = generateJwt(userBody, IS_USER);
