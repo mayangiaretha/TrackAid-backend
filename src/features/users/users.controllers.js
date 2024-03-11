@@ -47,6 +47,7 @@ class UsersControllers {
   }
 
   static async loginUser(req, res) {
+
     const { email, password } = req.body;
 
     const loggedIn = await usersModel.findOne({ email: email });

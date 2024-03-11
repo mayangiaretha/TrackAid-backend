@@ -13,7 +13,6 @@ router.post(
 );
 router.post(
   '/login',
-  verifiedToken,
   validate.login,
   asyncMiddleware(usersControllers.loginUser)
 );
