@@ -26,6 +26,10 @@ const clientSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
+  updatedAt: {
+    type: String,
+    required: false,
+  },
 });
 let clientsModel = mongoose.model('client', clientSchema);
 export default clientsModel;

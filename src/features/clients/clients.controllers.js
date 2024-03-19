@@ -1,9 +1,7 @@
-
-import clientsModel from "../../models/clients";
-import EnumHttpStatus from "../../enums/httpCode";
+import clientsModel from '../../models/clients';
+import EnumHttpStatus from '../../enums/httpCode';
 import { v4 as uuidv4 } from 'uuid';
-import dayjs from "dayjs";
-
+import dayjs from 'dayjs';
 
 class ClientsControllers {
   static async createAClient(req, res) {
@@ -19,38 +17,47 @@ class ClientsControllers {
     });
 
     return res.status(EnumHttpStatus.CREATED).json(newClient);
-
-
-  };
+  }
 
   static async getAClient(req, res) {
     const { id } = req.params;
     const client = await clientsModel.findOne({ clientId: id });
     if (!client)
-      return res.status(EnumHttpStatus.NOT_FOUND).json({ message: 'Client not found' });
-    return res.status(EnumHttpStatus.OK).json(client);
-
-  };
+      return res
+        .status(EnumHttpStatus.NOT_FOUND)
+        .json({ message: 'Client not found' });
+    return res
+      .status(EnumHttpStatus.OK)
+      .json({ client, message: 'client successfully created' });
+  }
 
   static async getAllClients(req, res) {
-
     const clients = await clientsModel.find();
     return res.status(EnumHttpStatus.OK).json(clients);
+  }
 
-
-  };
-
-  static async updateClient(req, res){
+  static async updateClient(req, res) {
     const { id } = req.params;
-    const { email, name, address, telephone} = req.body;
-      const updatedClient = await clientsModel.findOneAndUpdate({clientId:id},
-        { email, name, address, telephone, updatedAt: dayjs().format('YYYY-MM-DD h:mm:ss A'),},
-        { new: true }
-      );
-      res.status(EnumHttpStatus.OK).json(updatedClient);
+    const { email, name, address, telephone } = req.body;
 
-  };
+
+    const updatedClient = await clientsModel.findOneAndUpdate(
+      { clientId: id },
+      {
+        email,
+        name,
+        address,
+        telephone,
+        updatedAt: dayjs().format('YYYY-MM-DD h:mm:ss A'),
+      },
+      { new: true }
+    );
+
+
+    res
+      .status(EnumHttpStatus.OK)
+      .json({ updatedClient, message: 'client successfully updated' });
+  }
 }
 
-
-export default ClientsControllers
+export default ClientsControllers;
