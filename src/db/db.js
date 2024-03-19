@@ -4,7 +4,6 @@ const { MONGO_URI } = process.env;
 
 function connect() {
   // Connecting to the database
-  console.log(MONGO_URI, 'in here ==================>');
   mongoose
     .connect(`${MONGO_URI}`, {})
     .then(() => {

@@ -39,6 +39,17 @@ class ClientsControllers {
 
 
   };
+
+  static async updateClient(req, res){
+    const { id } = req.params;
+    const { email, name, address, telephone} = req.body;
+      const updatedClient = await clientsModel.findOneAndUpdate({clientId:id},
+        { email, name, address, telephone, updatedAt: dayjs().format('YYYY-MM-DD h:mm:ss A'),},
+        { new: true }
+      );
+      res.status(EnumHttpStatus.OK).json(updatedClient);
+
+  };
 }
 
 

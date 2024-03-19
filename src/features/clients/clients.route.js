@@ -7,6 +7,7 @@ const router = Router();
 router.post('/', asyncMiddleware(clientsControllers.createAClient));
 router.get('/:id', asyncMiddleware(clientsControllers.getAClient));
 router.get('/', asyncMiddleware(clientsControllers.getAllClients));
+router.put('/:id', asyncMiddleware(clientsControllers.updateClient));
 
 export default router;
 
