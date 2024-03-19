@@ -40,7 +40,6 @@ class ClientsControllers {
     const { id } = req.params;
     const { email, name, address, telephone } = req.body;
 
-
     const updatedClient = await clientsModel.findOneAndUpdate(
       { clientId: id },
       {
@@ -53,10 +52,22 @@ class ClientsControllers {
       { new: true }
     );
 
-
-    res
+    return res
       .status(EnumHttpStatus.OK)
       .json({ updatedClient, message: 'client successfully updated' });
+  }
+
+  static async deleteClient(req, res) {
+    const { id } = req.params;
+
+    const deleted = await clientsModel.findOneAndDelete({ clientId: id });
+    if (deleted === null) {
+      return res
+        .status(EnumHttpStatus.NOT_FOUND)
+        .json({ message: 'Client does not exist' });
+    } else {
+      return res.status(EnumHttpStatus.NO_CONTENT).json({ message: 'Client deleted' });
+    }
   }
 }
 

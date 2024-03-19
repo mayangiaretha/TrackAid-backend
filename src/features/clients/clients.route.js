@@ -8,6 +8,7 @@ router.post('/', asyncMiddleware(clientsControllers.createAClient));
 router.get('/:id', asyncMiddleware(clientsControllers.getAClient));
 router.get('/', asyncMiddleware(clientsControllers.getAllClients));
 router.put('/:id', asyncMiddleware(clientsControllers.updateClient));
+router.delete('/:id', asyncMiddleware(clientsControllers.deleteClient));
 
 export default router;
 
