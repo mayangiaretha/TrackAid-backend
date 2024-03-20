@@ -5,7 +5,7 @@ import dayjs from 'dayjs';
 import EnumHttpStatus from '../../enums/httpCode';
 import { encryptPassword } from '../../utils/hashPassword';
 import { generateJwt } from '../../utils/generateJwt';
-import { IS_USER } from '../../constants/roles';
+
 
 class UsersControllers {
   static async registerAUser(req, res) {
@@ -37,7 +37,7 @@ class UsersControllers {
 
     const createdUser = await newUser.save();
 
-    const token = generateJwt({ email, username, role: IS_USER });
+    const token = generateJwt({ email, username });
 
     return res.status(EnumHttpStatus.OK).json({
       message: 'User registered successfully',
@@ -72,7 +72,7 @@ class UsersControllers {
       email,
     };
 
-    const jwt = generateJwt(userBody, IS_USER);
+    const jwt = generateJwt(userBody);
 
     return res
       .status(EnumHttpStatus.ACCEPTED)
