@@ -66,7 +66,9 @@ class ClientsControllers {
         .status(EnumHttpStatus.NOT_FOUND)
         .json({ message: 'Client does not exist' });
     } else {
-      return res.status(EnumHttpStatus.NO_CONTENT).json({ message: 'Client deleted' });
+      return res
+        .status(EnumHttpStatus.NO_CONTENT)
+        .json({ message: 'Client deleted' });
     }
   }
 }
