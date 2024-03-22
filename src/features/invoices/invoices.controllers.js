@@ -50,6 +50,30 @@ class InvoicesControllers {
       .status(EnumHttpStatus.OK)
       .json({ invoice, message: 'invoice with id found' });
   }
+
+  static async updateInvoice(req, res) {
+    const { id } = req.params;
+    const {  items, amount, dueDate } =
+      req.body;
+
+    const updatedInvoice = await invoicesModel.findOneAndUpdate(
+      { invoiceId: id },
+      {
+        items,
+        amount,
+        dueDate,
+        updatedAt: dayjs().format('YYYY-MM-DD h:mm:ss A'),
+      },
+      { new: true }
+    );
+    if (!updatedInvoice) {
+      return res.status(EnumHttpStatus.NOT_FOUND).json({ message: 'Invoice not found' });
+    }
+
+    return res
+      .status(EnumHttpStatus.OK)
+      .json({ updatedInvoice, message: 'invoice successfully updated' });
+  }
 }
 
 export default InvoicesControllers;
