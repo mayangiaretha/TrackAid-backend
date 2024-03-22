@@ -28,7 +28,7 @@ class ClientsControllers {
         .json({ message: 'Client not found' });
     return res
       .status(EnumHttpStatus.OK)
-      .json({ client, message: 'client successfully created' });
+      .json({ client, message: 'client with id found' });
   }
 
   static async getAllClients(req, res) {

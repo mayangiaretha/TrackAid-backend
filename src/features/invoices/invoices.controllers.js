@@ -11,7 +11,6 @@ class InvoicesControllers {
 
     const existingClient = await clientsModel.findOne({ name, email });
 
-
     if (!existingClient) {
       await clientsModel.create({
         name,
@@ -34,12 +33,22 @@ class InvoicesControllers {
       createdAt: dayjs().format('YYYY-MM-DD h:mm:ss A'),
     });
 
-    // Return the new invoice
     return res.status(EnumHttpStatus.CREATED).json(newInvoice);
 
     return res
       .status(EnumHttpStatus.INTERNAL_SERVER_ERROR)
       .json({ message: 'Internal server error' });
+  }
+  static async getAnInvoice(req, res) {
+    const { id } = req.params;
+    const invoice = await invoicesModel.findOne({ invoiceId: id });
+    if (!invoice)
+      return res
+        .status(EnumHttpStatus.NOT_FOUND)
+        .json({ message: 'invoice not found' });
+    return res
+      .status(EnumHttpStatus.OK)
+      .json({ invoice, message: 'invoice with id found' });
   }
 }
 
