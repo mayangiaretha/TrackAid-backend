@@ -6,7 +6,6 @@ import EnumHttpStatus from '../../enums/httpCode';
 import { encryptPassword } from '../../utils/hashPassword';
 import { generateJwt } from '../../utils/generateJwt';
 
-
 class UsersControllers {
   static async registerAUser(req, res) {
     const { email, password, username } = req.body;
