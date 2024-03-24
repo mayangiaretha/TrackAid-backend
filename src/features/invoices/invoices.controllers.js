@@ -51,10 +51,14 @@ class InvoicesControllers {
       .json({ invoice, message: 'invoice with id found' });
   }
 
+  static async getAllInvoices(req, res) {
+    const invoices = await invoicesModel.find();
+    return res.status(EnumHttpStatus.OK).json(invoices);
+  }
+
   static async updateInvoice(req, res) {
     const { id } = req.params;
-    const {  items, amount, dueDate } =
-      req.body;
+    const { items, amount, dueDate } = req.body;
 
     const updatedInvoice = await invoicesModel.findOneAndUpdate(
       { invoiceId: id },
@@ -67,7 +71,9 @@ class InvoicesControllers {
       { new: true }
     );
     if (!updatedInvoice) {
-      return res.status(EnumHttpStatus.NOT_FOUND).json({ message: 'Invoice not found' });
+      return res
+        .status(EnumHttpStatus.NOT_FOUND)
+        .json({ message: 'Invoice not found' });
     }
 
     return res
