@@ -58,14 +58,22 @@ class InvoicesControllers {
 
   static async updateInvoice(req, res) {
     const { id } = req.params;
-    const { items, amount, dueDate } = req.body;
+
+    const { name, email, telephone, address, items, amount, dueDate, status } =
+      req.body;
 
     const updatedInvoice = await invoicesModel.findOneAndUpdate(
       { invoiceId: id },
+
       {
-        items,
-        amount,
+        name,
+        email,
+        telephone,
+        address,
+        items: items,
+        amount: amount,
         dueDate,
+        status,
         updatedAt: dayjs().format('YYYY-MM-DD h:mm:ss A'),
       },
       { new: true }
