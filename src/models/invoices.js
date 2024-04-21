@@ -34,13 +34,25 @@ const invoiceSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  subtotal: {
+    type: Number,
+    required: true,
+  },
+  tax: {
+    type: Number,
+    required: true,
+  },
   address: {
     type: String,
     required: true,
   },
   items: [
     {
-      productName: {
+      product: {
+        type: String,
+        required: false,
+      },
+      description: {
         type: String,
         required: false,
       },
@@ -48,13 +60,17 @@ const invoiceSchema = new mongoose.Schema({
         type: Number,
         required: false,
       },
-      price: {
+      unitPrice: {
+        type: Number,
+        required: false,
+      },
+      total: {
         type: Number,
         required: false,
       },
     },
   ],
-  amount: {
+  total: {
     type: Number,
     required: false,
   },
