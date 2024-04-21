@@ -6,8 +6,20 @@ import clientsModel from '../../models/clients';
 
 class InvoicesControllers {
   static async createAnInvoice(req, res) {
-    const { name, email, telephone, address, items, amount, dueDate } =
-      req.body;
+    const {
+      name,
+      email,
+      telephone,
+      address,
+      invoiceNo,
+      bankName,
+      accountNo,
+      swiftCode,
+      items,
+      amount,
+      dueDate,
+    } = req.body;
+    console.log(req.body, '======================>');
 
     const existingClient = await clientsModel.findOne({ name, email });
 
@@ -26,6 +38,10 @@ class InvoicesControllers {
     const newInvoice = await invoicesModel.create({
       clientId: existingClient ? existingClient._id : undefined,
       ...req.body,
+      invoiceNo,
+      bankName,
+      accountNo,
+      swiftCode,
       items,
       amount,
       dueDate,

@@ -6,11 +6,7 @@ import invoicesControllers from './invoices.controllers';
 
 const router = Router();
 
-router.post(
-  '/',
-  validate.invoiceSchema,
-  asyncMiddleware(InvoicesControllers.createAnInvoice)
-);
+router.post('/', asyncMiddleware(InvoicesControllers.createAnInvoice));
 router.get('/:id', asyncMiddleware(InvoicesControllers.getAnInvoice));
 router.get('/', asyncMiddleware(invoicesControllers.getAllInvoices));
 router.put(

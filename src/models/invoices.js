@@ -18,6 +18,22 @@ const invoiceSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
+  swiftCode: {
+    type: String,
+    required: true,
+  },
+  accountNo: {
+    type: String,
+    required: true,
+  },
+  bankName: {
+    type: String,
+    required: false,
+  },
+  invoiceNo: {
+    type: Number,
+    required: true,
+  },
   address: {
     type: String,
     required: true,

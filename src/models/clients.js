@@ -26,6 +26,7 @@ const clientSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
+
   updatedAt: {
     type: String,
     required: false,
