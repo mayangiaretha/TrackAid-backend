@@ -28,20 +28,28 @@ export default class validate {
     [Segments.BODY]: Joi.object().keys({
       name: Joi.string().min(3).max(35).required(),
       email: Joi.string().min(6).max(255).required().email(),
-      address: Joi.string().min(3).max(35).required(),
-      telephone: Joi.string().min(3).max(35).required(),
+      address: Joi.string().min(3).max(35),
+      telephone: Joi.string().min(3).max(35),
+      bankName: Joi.string().min(3).max(35),
+      accountName: Joi.string().min(3).max(35),
+      invoiceNo: Joi.number().integer().min(1).required(),
+      accountNo: Joi.number().integer().min(1),
       items: Joi.array()
         .items(
           Joi.object({
-            productName: Joi.string().min(1).max(255).required(),
+            product: Joi.string().min(1).max(255).required(),
             quantity: Joi.number().integer().min(1).required(),
-            price: Joi.number().min(0).required(),
+            unitPrice: Joi.number().min(0).required(),
+            description: Joi.string().min(1).max(255).required(),
+            total: Joi.number().min(0).required(),
           })
         )
         .required(),
-      amount: Joi.number().min(0).required(),
-      dueDate: Joi.date().iso().required(),
-      status: Joi.string().valid('pending', 'paid', 'unpaid').required(),
+      total: Joi.number().min(0).required(),
+      tax: Joi.number().min(0).required(),
+      subtotal: Joi.number().min(0).required(),
+      dueDate: Joi.string().required(),
+      status: Joi.string().valid('pending', 'paid'),
     }),
   });
 }

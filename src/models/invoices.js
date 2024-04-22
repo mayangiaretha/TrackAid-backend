@@ -18,13 +18,41 @@ const invoiceSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
+  accountNo: {
+    type: String,
+    required: true,
+  },
+  bankName: {
+    type: String,
+    required: false,
+  },
+  accountName: {
+    type: String,
+    required: false,
+  },
+  invoiceNo: {
+    type: Number,
+    required: true,
+  },
+  subtotal: {
+    type: Number,
+    required: true,
+  },
+  tax: {
+    type: Number,
+    required: true,
+  },
   address: {
     type: String,
     required: true,
   },
   items: [
     {
-      productName: {
+      product: {
+        type: String,
+        required: false,
+      },
+      description: {
         type: String,
         required: false,
       },
@@ -32,19 +60,24 @@ const invoiceSchema = new mongoose.Schema({
         type: Number,
         required: false,
       },
-      price: {
+      unitPrice: {
+        type: Number,
+        required: false,
+      },
+      total: {
         type: Number,
         required: false,
       },
     },
   ],
-  amount: {
+  total: {
     type: Number,
     required: false,
   },
   dueDate: {
-    type: Date,
-    required: false,
+    type: String,
+    required: false
+
   },
   status: {
     type: String,
@@ -52,12 +85,12 @@ const invoiceSchema = new mongoose.Schema({
     default: 'pending',
   },
   createdAt: {
-    type: Date,
-    default: Date.now,
+    type: String,
+    required: false,
   },
   updatedAt: {
-    type: Date,
-    default: Date.now,
+    type: String,
+    required: false,
   },
 });
 
