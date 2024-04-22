@@ -6,7 +6,7 @@ import clientsModel from '../../models/clients';
 
 class InvoicesControllers {
   static async createAnInvoice(req, res) {
-    console.log(req.body, 'the body ====>');
+
     const { name, email, telephone, address } = req.body;
 
     const existingClient = await clientsModel.findOne({ name, email });
@@ -17,7 +17,7 @@ class InvoicesControllers {
         email,
         telephone,
         address,
-        createdAt: dayjs().format('YYYY-MM-DD h:mm:ss A'),
+        createdAt: dayjs().format('YYYY-MM-DD'),
         clientId: uuidv4(),
       });
     }
@@ -27,7 +27,7 @@ class InvoicesControllers {
       clientId: existingClient ? existingClient._id : undefined,
       ...req.body,
       invoiceId: uuidv4(),
-      createdAt: dayjs().format('YYYY-MM-DD h:mm:ss A'),
+      createdAt: dayjs().format('YYYY-MM-DD'),
     });
 
     return res.status(EnumHttpStatus.CREATED).json(newInvoice);

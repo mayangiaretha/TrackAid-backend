@@ -18,15 +18,15 @@ const invoiceSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
-  swiftCode: {
-    type: String,
-    required: true,
-  },
   accountNo: {
     type: String,
     required: true,
   },
   bankName: {
+    type: String,
+    required: false,
+  },
+  accountName: {
     type: String,
     required: false,
   },
@@ -75,8 +75,9 @@ const invoiceSchema = new mongoose.Schema({
     required: false,
   },
   dueDate: {
-    type: Date,
-    required: false,
+    type: String,
+    required: false
+
   },
   status: {
     type: String,
@@ -84,12 +85,12 @@ const invoiceSchema = new mongoose.Schema({
     default: 'pending',
   },
   createdAt: {
-    type: Date,
-    default: Date.now,
+    type: String,
+    required: false,
   },
   updatedAt: {
-    type: Date,
-    default: Date.now,
+    type: String,
+    required: false,
   },
 });
 

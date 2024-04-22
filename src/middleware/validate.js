@@ -31,6 +31,7 @@ export default class validate {
       address: Joi.string().min(3).max(35),
       telephone: Joi.string().min(3).max(35),
       bankName: Joi.string().min(3).max(35),
+      accountName: Joi.string().min(3).max(35),
       invoiceNo: Joi.number().integer().min(1).required(),
       accountNo: Joi.number().integer().min(1),
       items: Joi.array()
@@ -47,8 +48,7 @@ export default class validate {
       total: Joi.number().min(0).required(),
       tax: Joi.number().min(0).required(),
       subtotal: Joi.number().min(0).required(),
-      swiftCode: Joi.string().min(3).max(15).required(),
-      dueDate: Joi.date().iso().required(),
+      dueDate: Joi.string().required(),
       status: Joi.string().valid('pending', 'paid'),
     }),
   });
